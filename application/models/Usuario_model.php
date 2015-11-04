@@ -111,6 +111,27 @@ class Usuario_model extends CI_Model{
     function setConferencias($conferencias) {
         $this->conferencias = $conferencias;
     }
-
+    
+    function editarUsuario($data) {
+        $this->db->where('codigo', $data['codigo']);
+        $this->db->set($data);
+        $this->db->update('usuario');
+    }
+    
+    function inserirUsuario($dataUsuario, $dataConhecimentos) {
+        $this->db->insert('usuario', $dataUsuario);
+        $this->db->insert('usuario_areas_conhecimento', $dataConhecimentos);
+    }
+    
+    function login($login, $senha) {
+            $query = $this->db->get('usuario', array('login' => $login, 'senha' => $senha));
+            $resultado = $query->result();
+            if(empty($resultado) || !isset($resultado) || is_null($resultado) ){
+                return false;
+            }else{
+                return true;
+            }
+    }
+    
 
 }

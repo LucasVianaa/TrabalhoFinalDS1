@@ -14,7 +14,7 @@
 class Conferencia_model extends CI_Model{
     private $codigo, $cidade, $precoEstudante, $precoProfessor, $precoOutros,
             $pais, $dataInicio, $dataFim, $topicosInteresse, $areaConhecimento,
-            $dataInicioInscricao, $dataFimInscricao;
+            $dataInicioInscricao, $dataFimInscricao, $autores;
     
     function getCodigo() {
         return $this->codigo;
@@ -110,6 +110,45 @@ class Conferencia_model extends CI_Model{
 
     function setDataFimInscricao($dataFimInscricao) {
         $this->dataFimInscricao = $dataFimInscricao;
+    }
+    
+    function getAutores() {
+        return $this->autores;
+    }
+
+    function setAutores($autores) {
+        $this->autores = $autores;
+    }
+
+    
+    function listarConferenciasAtuaisPorUsuario($codigoUsuario, $data) {
+        $this->db->select('conferencia.*');
+        $this->db->join('conferencia_usuario', 'conferencia.codigo = conferencia_usuario.conferencia');
+        $this->db->where('conferencia.data_fim <', $data);
+        $query = $this->db->get('conferencia', array('conferencia_usuario.usuario' => $codigoUsuario));
+
+        return $query->result();
+    }
+    
+    function listarConferenciasAtuais($data) {
+        $this->db->select('*');
+        $this->db->where('conferencia.data_fim <', $data);
+        $query = $this->db->get('conferencia');
+
+        return $query->result();
+    }
+    
+    function inserirConferencia($conferencia, $conferenciaAutor, $topicos, $preco) {
+        $this->db->insert('conferencia', $conferencia);
+        $this->db->insert('conferencia_usuario', $conferenciaAutor);
+        $this->db->insert('conferencia_topicos', $topicos);
+        $this->db->insert('preco_conferencia', $preco);
+
+    }
+    
+    function inserirUsuarioEmConferencia($conferenciaUsuario) {
+        $this->db->insert('conferencia_usuario', $conferenciaUsuario);
+
     }
 
 

@@ -37,9 +37,9 @@ class Pessoa_model extends CI_MODEL
 	}
 
 	function editarPessoa($data) {
-		$this->db->where('id', $data['id']);
-    	$this->db->set($data);
-    	$this->db->update('pessoa');
+            $this->db->where('id', $data['id']);
+            $this->db->set($data);
+            $this->db->update('pessoa');
 	}
 }
 ?>
