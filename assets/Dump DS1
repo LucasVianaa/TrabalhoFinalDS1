@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.3.5
 -- Dumped by pg_dump version 9.3.5
--- Started on 2015-11-04 15:26:25 BRST
+-- Started on 2015-11-04 15:37:09 BRST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -48,7 +48,7 @@ CREATE SEQUENCE area_conhecimento_codigo_seq
 ALTER TABLE public.area_conhecimento_codigo_seq OWNER TO postgres;
 
 --
--- TOC entry 2088 (class 0 OID 0)
+-- TOC entry 2101 (class 0 OID 0)
 -- Dependencies: 196
 -- Name: area_conhecimento_codigo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -86,7 +86,7 @@ CREATE SEQUENCE area_conhecimento_usuario_codigo_seq
 ALTER TABLE public.area_conhecimento_usuario_codigo_seq OWNER TO postgres;
 
 --
--- TOC entry 2089 (class 0 OID 0)
+-- TOC entry 2102 (class 0 OID 0)
 -- Dependencies: 198
 -- Name: area_conhecimento_usuario_codigo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -130,7 +130,7 @@ CREATE SEQUENCE conferencia_codigo_seq
 ALTER TABLE public.conferencia_codigo_seq OWNER TO postgres;
 
 --
--- TOC entry 2090 (class 0 OID 0)
+-- TOC entry 2103 (class 0 OID 0)
 -- Dependencies: 194
 -- Name: conferencia_codigo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -169,12 +169,52 @@ CREATE SEQUENCE conferencia_usuario_codigo_seq
 ALTER TABLE public.conferencia_usuario_codigo_seq OWNER TO postgres;
 
 --
--- TOC entry 2091 (class 0 OID 0)
+-- TOC entry 2104 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: conferencia_usuario_codigo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE conferencia_usuario_codigo_seq OWNED BY conferencia_usuario.codigo;
+
+
+--
+-- TOC entry 203 (class 1259 OID 17426)
+-- Name: preco_conferencia; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE preco_conferencia (
+    codigo integer NOT NULL,
+    conferencia integer,
+    preco_estudante numeric,
+    preco_professor numeric,
+    preco_outros numeric
+);
+
+
+ALTER TABLE public.preco_conferencia OWNER TO postgres;
+
+--
+-- TOC entry 202 (class 1259 OID 17424)
+-- Name: preco_conferencia_codigo_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE preco_conferencia_codigo_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.preco_conferencia_codigo_seq OWNER TO postgres;
+
+--
+-- TOC entry 2105 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: preco_conferencia_codigo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE preco_conferencia_codigo_seq OWNED BY preco_conferencia.codigo;
 
 
 --
@@ -214,7 +254,7 @@ CREATE SEQUENCE usuario_codigo_seq
 ALTER TABLE public.usuario_codigo_seq OWNER TO postgres;
 
 --
--- TOC entry 2092 (class 0 OID 0)
+-- TOC entry 2106 (class 0 OID 0)
 -- Dependencies: 192
 -- Name: usuario_codigo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -223,7 +263,7 @@ ALTER SEQUENCE usuario_codigo_seq OWNED BY usuario.codigo;
 
 
 --
--- TOC entry 1946 (class 2604 OID 17381)
+-- TOC entry 1953 (class 2604 OID 17381)
 -- Name: codigo; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -231,7 +271,7 @@ ALTER TABLE ONLY area_conhecimento ALTER COLUMN codigo SET DEFAULT nextval('area
 
 
 --
--- TOC entry 1947 (class 2604 OID 17392)
+-- TOC entry 1954 (class 2604 OID 17392)
 -- Name: codigo; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -239,7 +279,7 @@ ALTER TABLE ONLY area_conhecimento_usuario ALTER COLUMN codigo SET DEFAULT nextv
 
 
 --
--- TOC entry 1945 (class 2604 OID 17370)
+-- TOC entry 1952 (class 2604 OID 17370)
 -- Name: codigo; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -247,7 +287,7 @@ ALTER TABLE ONLY conferencia ALTER COLUMN codigo SET DEFAULT nextval('conferenci
 
 
 --
--- TOC entry 1948 (class 2604 OID 17411)
+-- TOC entry 1955 (class 2604 OID 17411)
 -- Name: codigo; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -255,7 +295,15 @@ ALTER TABLE ONLY conferencia_usuario ALTER COLUMN codigo SET DEFAULT nextval('co
 
 
 --
--- TOC entry 1944 (class 2604 OID 17357)
+-- TOC entry 1956 (class 2604 OID 17429)
+-- Name: codigo; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY preco_conferencia ALTER COLUMN codigo SET DEFAULT nextval('preco_conferencia_codigo_seq'::regclass);
+
+
+--
+-- TOC entry 1951 (class 2604 OID 17357)
 -- Name: codigo; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -263,7 +311,7 @@ ALTER TABLE ONLY usuario ALTER COLUMN codigo SET DEFAULT nextval('usuario_codigo
 
 
 --
--- TOC entry 2077 (class 0 OID 17378)
+-- TOC entry 2088 (class 0 OID 17378)
 -- Dependencies: 197
 -- Data for Name: area_conhecimento; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -271,7 +319,7 @@ ALTER TABLE ONLY usuario ALTER COLUMN codigo SET DEFAULT nextval('usuario_codigo
 
 
 --
--- TOC entry 2093 (class 0 OID 0)
+-- TOC entry 2107 (class 0 OID 0)
 -- Dependencies: 196
 -- Name: area_conhecimento_codigo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -280,7 +328,7 @@ SELECT pg_catalog.setval('area_conhecimento_codigo_seq', 1, false);
 
 
 --
--- TOC entry 2079 (class 0 OID 17389)
+-- TOC entry 2090 (class 0 OID 17389)
 -- Dependencies: 199
 -- Data for Name: area_conhecimento_usuario; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -288,7 +336,7 @@ SELECT pg_catalog.setval('area_conhecimento_codigo_seq', 1, false);
 
 
 --
--- TOC entry 2094 (class 0 OID 0)
+-- TOC entry 2108 (class 0 OID 0)
 -- Dependencies: 198
 -- Name: area_conhecimento_usuario_codigo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -297,7 +345,7 @@ SELECT pg_catalog.setval('area_conhecimento_usuario_codigo_seq', 1, false);
 
 
 --
--- TOC entry 2075 (class 0 OID 17367)
+-- TOC entry 2086 (class 0 OID 17367)
 -- Dependencies: 195
 -- Data for Name: conferencia; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -305,7 +353,7 @@ SELECT pg_catalog.setval('area_conhecimento_usuario_codigo_seq', 1, false);
 
 
 --
--- TOC entry 2095 (class 0 OID 0)
+-- TOC entry 2109 (class 0 OID 0)
 -- Dependencies: 194
 -- Name: conferencia_codigo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -314,7 +362,7 @@ SELECT pg_catalog.setval('conferencia_codigo_seq', 1, false);
 
 
 --
--- TOC entry 2081 (class 0 OID 17408)
+-- TOC entry 2092 (class 0 OID 17408)
 -- Dependencies: 201
 -- Data for Name: conferencia_usuario; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -322,7 +370,7 @@ SELECT pg_catalog.setval('conferencia_codigo_seq', 1, false);
 
 
 --
--- TOC entry 2096 (class 0 OID 0)
+-- TOC entry 2110 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: conferencia_usuario_codigo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -331,7 +379,24 @@ SELECT pg_catalog.setval('conferencia_usuario_codigo_seq', 1, false);
 
 
 --
--- TOC entry 2073 (class 0 OID 17354)
+-- TOC entry 2094 (class 0 OID 17426)
+-- Dependencies: 203
+-- Data for Name: preco_conferencia; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2111 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: preco_conferencia_codigo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('preco_conferencia_codigo_seq', 1, false);
+
+
+--
+-- TOC entry 2084 (class 0 OID 17354)
 -- Dependencies: 193
 -- Data for Name: usuario; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -339,7 +404,7 @@ SELECT pg_catalog.setval('conferencia_usuario_codigo_seq', 1, false);
 
 
 --
--- TOC entry 2097 (class 0 OID 0)
+-- TOC entry 2112 (class 0 OID 0)
 -- Dependencies: 192
 -- Name: usuario_codigo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -348,7 +413,7 @@ SELECT pg_catalog.setval('usuario_codigo_seq', 1, false);
 
 
 --
--- TOC entry 1956 (class 2606 OID 17386)
+-- TOC entry 1964 (class 2606 OID 17386)
 -- Name: area_conhecimento_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -357,7 +422,7 @@ ALTER TABLE ONLY area_conhecimento
 
 
 --
--- TOC entry 1958 (class 2606 OID 17394)
+-- TOC entry 1966 (class 2606 OID 17394)
 -- Name: area_conhecimento_usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -366,7 +431,7 @@ ALTER TABLE ONLY area_conhecimento_usuario
 
 
 --
--- TOC entry 1954 (class 2606 OID 17375)
+-- TOC entry 1962 (class 2606 OID 17375)
 -- Name: conferencia_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -375,7 +440,7 @@ ALTER TABLE ONLY conferencia
 
 
 --
--- TOC entry 1960 (class 2606 OID 17413)
+-- TOC entry 1968 (class 2606 OID 17413)
 -- Name: conferencia_usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -384,7 +449,16 @@ ALTER TABLE ONLY conferencia_usuario
 
 
 --
--- TOC entry 1950 (class 2606 OID 17364)
+-- TOC entry 1970 (class 2606 OID 17434)
+-- Name: preco_conferencia_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY preco_conferencia
+    ADD CONSTRAINT preco_conferencia_pkey PRIMARY KEY (codigo);
+
+
+--
+-- TOC entry 1958 (class 2606 OID 17364)
 -- Name: usuario_login_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -393,7 +467,7 @@ ALTER TABLE ONLY usuario
 
 
 --
--- TOC entry 1952 (class 2606 OID 17362)
+-- TOC entry 1960 (class 2606 OID 17362)
 -- Name: usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -402,7 +476,7 @@ ALTER TABLE ONLY usuario
 
 
 --
--- TOC entry 1962 (class 2606 OID 17400)
+-- TOC entry 1972 (class 2606 OID 17400)
 -- Name: area_conhecimento_usuario_area_conhecimento_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -411,7 +485,7 @@ ALTER TABLE ONLY area_conhecimento_usuario
 
 
 --
--- TOC entry 1961 (class 2606 OID 17395)
+-- TOC entry 1971 (class 2606 OID 17395)
 -- Name: area_conhecimento_usuario_usuario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -420,7 +494,7 @@ ALTER TABLE ONLY area_conhecimento_usuario
 
 
 --
--- TOC entry 1964 (class 2606 OID 17419)
+-- TOC entry 1974 (class 2606 OID 17419)
 -- Name: conferencia_usuario_conferencia_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -429,7 +503,7 @@ ALTER TABLE ONLY conferencia_usuario
 
 
 --
--- TOC entry 1963 (class 2606 OID 17414)
+-- TOC entry 1973 (class 2606 OID 17414)
 -- Name: conferencia_usuario_usuario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -438,7 +512,16 @@ ALTER TABLE ONLY conferencia_usuario
 
 
 --
--- TOC entry 2087 (class 0 OID 0)
+-- TOC entry 1975 (class 2606 OID 17435)
+-- Name: preco_conferencia_conferencia_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY preco_conferencia
+    ADD CONSTRAINT preco_conferencia_conferencia_fkey FOREIGN KEY (conferencia) REFERENCES conferencia(codigo);
+
+
+--
+-- TOC entry 2100 (class 0 OID 0)
 -- Dependencies: 6
 -- Name: public; Type: ACL; Schema: -; Owner: postgres
 --
@@ -449,7 +532,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2015-11-04 15:26:25 BRST
+-- Completed on 2015-11-04 15:37:09 BRST
 
 --
 -- PostgreSQL database dump complete
