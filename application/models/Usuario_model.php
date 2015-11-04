@@ -15,6 +15,11 @@ class Usuario_model extends CI_Model{
     private $codigo, $nome, $login, $senha, $dataNascimento, $endereco, $telefone,
             $cpf, $email, $instituicao, $conferencias, $areasConhecimento;
     
+    function __construct()
+	{
+		parent::__construct();
+	}
+    
     function getAreasConhecimento() {
         return $this->areasConhecimento;
     }

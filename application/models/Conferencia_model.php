@@ -16,6 +16,11 @@ class Conferencia_model extends CI_Model{
             $pais, $dataInicio, $dataFim, $topicosInteresse, $areaConhecimento,
             $dataInicioInscricao, $dataFimInscricao, $autores;
     
+    function __construct()
+	{
+		parent::__construct();
+	}
+    
     function getCodigo() {
         return $this->codigo;
     }
