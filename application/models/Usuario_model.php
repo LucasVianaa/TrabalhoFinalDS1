@@ -12,7 +12,7 @@
  * @author aluno
  */
 class Usuario_model extends CI_Model{
-    private $codigo, $nome, $login, $senha, $dataNascimento, $endereco, $telefone,
+    private $codigo, $nome, $senha, $dataNascimento, $endereco, $telefone,
             $cpf, $email, $instituicao, $conferencias, $areasConhecimento;
     
     function __construct()
@@ -37,9 +37,6 @@ class Usuario_model extends CI_Model{
         return $this->nome;
     }
 
-    function getLogin() {
-        return $this->login;
-    }
 
     function getSenha() {
         return $this->senha;
@@ -81,9 +78,6 @@ class Usuario_model extends CI_Model{
         $this->nome = $nome;
     }
 
-    function setLogin($login) {
-        $this->login = $login;
-    }
 
     function setSenha($senha) {
         $this->senha = $senha;
@@ -128,8 +122,9 @@ class Usuario_model extends CI_Model{
         $this->db->insert('usuario_areas_conhecimento', $dataConhecimentos);
     }
     
-    function login($login, $senha) {
-            $query = $this->db->get('usuario', array('login' => $login, 'senha' => $senha));
+    function login($email, $senha) {
+        
+            $query = $this->db->get('usuario', array('email' => $email, 'senha' => $senha));
             $resultado = $query->result();
             if(empty($resultado) || !isset($resultado) || is_null($resultado) ){
                 return false;

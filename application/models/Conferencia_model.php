@@ -129,7 +129,7 @@ class Conferencia_model extends CI_Model{
     function listarConferenciasAtuaisPorUsuario($codigoUsuario, $data) {
         $this->db->select('conferencia.*');
         $this->db->join('conferencia_usuario', 'conferencia.codigo = conferencia_usuario.conferencia');
-        $this->db->where('conferencia.data_fim <', $data);
+        $this->db->where('conferencia.data_fim >', $data);
         $query = $this->db->get('conferencia', array('conferencia_usuario.usuario' => $codigoUsuario));
 
         return $query->result();
@@ -137,7 +137,7 @@ class Conferencia_model extends CI_Model{
     
     function listarConferenciasAtuais($data) {
         $this->db->select('*');
-        $this->db->where('conferencia.data_fim <', $data);
+        $this->db->where('conferencia.data_fim >', $data);
         $query = $this->db->get('conferencia');
 
         return $query->result();
