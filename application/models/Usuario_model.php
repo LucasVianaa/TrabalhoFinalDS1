@@ -117,14 +117,43 @@ class Usuario_model extends CI_Model{
         $this->db->update('usuario');
     }
     
-    function inserirUsuario($dataUsuario, $dataConhecimentos) {
+    function inserirUsuario($dataUsuario) {
         $this->db->insert('usuario', $dataUsuario);
-        $this->db->insert('usuario_areas_conhecimento', $dataConhecimentos);
+        return $this->db->insert_id();
+
+    }
+    function inserirInteresse($dataConhecimentos) {
+        $this->db->insert('usuario_areas_interesse', $dataConhecimentos);
+    }
+    
+    function lastUser() {
+        $this->db->select('codigo');
+        $this->db->order_by("codigo", "desc"); 
+        $this->db->limit(1); 
+        $query = $this->db->get('usuario');
+
+        return $query->result();
+    }
+    
+    function getUserCodeByEmail($email) {
+        $this->db->select('codigo');
+        $this->db->where('email =', $email); 
+        $query = $this->db->get('usuario');
+
+        return $query->result();
+    }
+    
+    function getUserById($id) {
+        $this->db->where('id =', $id); 
+        $query = $this->db->get('usuario');
+
+        return $query->result();
     }
     
     function login($email, $senha) {
-        
-            $query = $this->db->get('usuario', array('email' => $email, 'senha' => $senha));
+            $this->db->where('email =', $email);
+            $this->db->where('senha =', $senha);
+            $query = $this->db->get('usuario');
             $resultado = $query->result();
             if(empty($resultado) || !isset($resultado) || is_null($resultado) ){
                 return false;
