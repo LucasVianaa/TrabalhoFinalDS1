@@ -4,10 +4,10 @@
 	</h1>
 <?php
 
-   echo anchor(base_url().'index.php/Conferencia/telaConferenciasDisponiveis', 'Conferencias Disponiveis');
+   echo anchor(base_url().'index.php/Conferencia/listarConferenciasDisponiveis', 'Conferencias Disponiveis');
    echo br();
    
-   echo anchor(base_url().'index.php/Conferencia/minhasConferencias', 'Minhas Conferencias');
+   echo anchor(base_url().'index.php/Conferencia/listarMinhasConferencias', 'Minhas Conferencias');
    echo br();
    
    echo anchor(base_url().'index.php/Conferencia/telaCriarConferencias', 'Criar conferencias');

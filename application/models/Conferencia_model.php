@@ -126,30 +126,55 @@ class Conferencia_model extends CI_Model{
     }
 
     
-    function listarConferenciasAtuaisPorUsuario($codigoUsuario, $data) {
+    function listarConferenciasAtuaisPorUsuario() {
         $this->db->select('conferencia.*');
         $this->db->join('conferencia_usuario', 'conferencia.codigo = conferencia_usuario.conferencia');
-        $this->db->where('conferencia.data_fim >', $data);
-        $query = $this->db->get('conferencia', array('conferencia_usuario.usuario' => $codigoUsuario));
-
-        return $query->result();
-    }
-    
-    function listarConferenciasAtuais($data) {
-        $this->db->select('*');
-        $this->db->where('conferencia.data_fim >', $data);
+        $this->db->where('conferencia.data_fim >', date("d-m-y"));
+        $this->db->where('conferencia_usuario.usuario =', $this->session->all_userdata()['codigo']);
         $query = $this->db->get('conferencia');
 
         return $query->result();
     }
     
-    function inserirConferencia($conferencia, $conferenciaAutor, $topicos, $preco) {
+    
+    function listarAreasConhecimento() {
+        $query = $this->db->get('area_conhecimento');
+
+        return $query->result();
+    }
+    
+    function listarConferenciasAtuais() {
+        $this->db->select('*');
+        $this->db->where('conferencia.data_fim >', date("d-m-y"));
+        $query = $this->db->get('conferencia');
+
+        return $query->result();
+    }
+    
+    function inserirConferencia($conferencia) {
         $this->db->insert('conferencia', $conferencia);
+        return $this->db->insert_id();
+        /*
+         * $conferenciaAutor, $topicos, $preco
         $this->db->insert('conferencia_usuario', $conferenciaAutor);
         $this->db->insert('conferencia_topicos', $topicos);
         $this->db->insert('preco_conferencia', $preco);
+         * 
+         */
 
     }
+    
+    function inserirTopico($topico) {
+        $this->db->insert('conferencia_topicos', $topico);
+
+    }
+    
+    function inserirPrecos($preco) {
+        $this->db->insert('preco_conferencia', $preco);
+
+    }
+    
+    
     
     function inserirUsuarioEmConferencia($conferenciaUsuario) {
         $this->db->insert('conferencia_usuario', $conferenciaUsuario);

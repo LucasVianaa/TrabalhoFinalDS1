@@ -58,11 +58,7 @@ class Usuario extends CI_CONTROLLER{
                 $codigo = $this->Usuario_model->getUserCodeByEmail($this->input->post('email'));
                 $newdata = array('codigo' => $codigo[0]->codigo);
                 $this->session->set_userdata($newdata);
-                $data['titulo'] = 'Menu';
-
-                $this->load->view('header');
-                $this->load->view('menu', $data);
-                $this->load->view('footer');
+                $this->menu();
                 
             }else{
                 redirect('Pessoa');
@@ -70,6 +66,14 @@ class Usuario extends CI_CONTROLLER{
 
         }
     
+    }
+    
+    function menu(){
+        $data['titulo'] = 'Menu';
+
+        $this->load->view('header');
+        $this->load->view('menu', $data);
+        $this->load->view('footer');
     }
     
     function cadastrarUsuario(){
@@ -145,11 +149,7 @@ class Usuario extends CI_CONTROLLER{
                     die();
             }
 
-            $data['titulo'] = 'Menu';
-
-                $this->load->view('header');
-                $this->load->view('menu', $data);
-                $this->load->view('footer');
+            $this->menu();
             
             
 
