@@ -35,14 +35,16 @@ class Usuario extends CI_CONTROLLER{
     
     function telaEditarCadastro() {
         $data['titulo'] = 'Editar usuario';
-        if ($this->input->get()) {
+        
             $this->load->model('Usuario_model');
+
+          
             $data['usuario'] = $this->Usuario_model->getUserById($this->session->all_userdata()['codigo']);
             
             $this->load->view('header');
             $this->load->view('editarUsuario', $data);
             $this->load->view('footer');
-        }
+        
         
     }
     
@@ -107,6 +109,47 @@ class Usuario extends CI_CONTROLLER{
                 }
             }
             redirect('Usuario');
+            
+            
+
+        } else {
+
+            $data['titulo'] = 'Cradastrar Nova Pessoa';
+
+            $this->load->view('header');
+            $this->load->view('cadastroUsuario', $data);
+        }		
+    }
+    
+    function editarUsuario(){
+        if ($this->input->post()) {
+            $data['codigo'] = $this->input->post('codigo');
+            $data['nome'] = $this->input->post('nome');
+            $data['email'] = $this->input->post('email');
+            $data['instituicao'] = $this->input->post('instituicao');
+            $data['data_nascimento'] = $this->input->post('data_nascimento');
+            $data['senha'] = $this->input->post('senha');
+            $data['cpf'] = $this->input->post('cpf');
+            $data['telefone'] = $this->input->post('telefone');
+            $data['endereco'] = $this->input->post('endereco');
+            $this->load->model('Usuario_model');
+            
+            $id;
+          
+
+            try {
+                   $id = $this->Usuario_model->editarUsuario($data);
+                    
+            } catch (Exception $e) {
+                    echo $e; 
+                    die();
+            }
+
+            $data['titulo'] = 'Menu';
+
+                $this->load->view('header');
+                $this->load->view('menu', $data);
+                $this->load->view('footer');
             
             
 

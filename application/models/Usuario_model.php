@@ -144,7 +144,7 @@ class Usuario_model extends CI_Model{
     }
     
     function getUserById($id) {
-        $this->db->where('id =', $id); 
+        $this->db->where('codigo =', $id); 
         $query = $this->db->get('usuario');
 
         return $query->result();
